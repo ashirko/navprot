@@ -152,7 +152,6 @@ func (subData *SubRecord) formPosData() (subrec []byte) {
 func (subData *SubRecord) formResponce() (subrec []byte) {
 	data := subData.Data.(*Confirmation)
 	subrec = make([]byte, 6)
-	subrec[0] = EgtsSrResponse
 	binary.LittleEndian.PutUint16(subrec[1:3], uint16(3))
 	binary.LittleEndian.PutUint16(subrec[3:5], data.CRN)
 	subrec[5] = data.RST
@@ -190,8 +189,6 @@ func (subData *SubRecord) String() string {
 		data = subData.Data.(*Confirmation).String()
 	case *PosData:
 		data = subData.Data.(*PosData).String()
-	case *FuelData:
-		data = subData.Data.(*FuelData).String()
 	default:
 		data = fmt.Sprintf("%v", data)
 	}
@@ -203,10 +200,6 @@ func (sub *PosData) String() string {
 }
 
 func (sub *Confirmation) String() string {
-	return stringDefault(*sub)
-}
-
-func (sub *FuelData) String() string {
 	return stringDefault(*sub)
 }
 
