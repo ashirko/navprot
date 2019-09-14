@@ -49,7 +49,6 @@ func (packetData *Packet) parseHeader(message []byte) (body, restBuf []byte, err
 		return
 	}
 	packetData.Type = message[index+9]
-	packetData.ID = binary.LittleEndian.Uint16(message[index+7 : index+9])
 	restBuf = append([]byte(nil), message[index+headerLen+bodyLen+2:]...)
 	return
 }
